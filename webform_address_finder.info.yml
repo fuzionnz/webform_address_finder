@@ -1,0 +1,5 @@
+name: WebForm Address Finder
+description: Uses Address Finder API to lookup addresses in webform
+package: webform
+type: module
+core_version_requirement: ^8 || ^9 || ^10

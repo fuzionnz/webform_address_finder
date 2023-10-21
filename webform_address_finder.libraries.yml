@@ -1,0 +1,4 @@
+address_finder:
+  js:
+    js/addressfinder.init.js: {}
+    js/addressfinder.api.js: {}

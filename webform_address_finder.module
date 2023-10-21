@@ -1,0 +1,28 @@
+<?php
+
+function webform_address_finder_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if (substr($form['#id'], 0, 20) == 'webform-handler-form') {
+    return;
+  }
+  switch ($form['#id']) {
+    case 'webform-handlers-form';
+      return;
+    default:
+      if ((!empty($form['#webform_id']) && $form_state->getFormObject()->getEntity()->getWebform()->getHandlers()->has('webform_civicrm')) || $form_id == 'civicrm_user_profile') {
+        \Drupal::service('civicrm')->initialize();
+        $key = Civi::settings()->get('address_finder_key');
+        CRM_Core_Resources::singleton()->addVars('addressfinder', [
+          'key' => $key,
+        ]);
+        if ($form_id == 'civicrm_user_profile') {
+          $config = CRM_Core_Config::singleton();
+          $config->userFrameworkFrontend = TRUE;
+          \CRM_Core_Resources::singleton()->addCoreResources();
+        }
+        else {
+          $form['#attached']['library'][] = 'webform_address_finder/address_finder';
+        }
+      }
+  }
+
+}
