@@ -32,7 +32,8 @@
           'NZ',
           {byline: false, max_results: 8}
         );
-        if ($("[id$='" + address_id + "-country-id']").val() == 1154) {
+        // If no country field, consider the default NZ.
+        if ($("[id$='" + address_id + "-country-id']").val() == 1154 || $("[id$='" + address_id + "-country-id']").length === 0) {
           $("[id$='" + address_id + "-street-address']").attr('placeholder', 'Start typing an address...');
           setReadOnly($("[id$='" + address_id + "-supplemental-address-2']"));
           setReadOnly($("[id$='" + address_id + "-city']"));
