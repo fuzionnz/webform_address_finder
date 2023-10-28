@@ -35,14 +35,14 @@
         // If no country field, consider the default NZ.
         if ($("[id$='" + address_id + "-country-id']").val() == 1154 || $("[id$='" + address_id + "-country-id']").length === 0) {
           $("[id$='" + address_id + "-street-address']").attr('placeholder', 'Start typing an address...');
-          setReadOnly($("[id$='" + address_id + "-supplemental-address-2']"));
+          setReadOnly($("[id$='" + address_id + "-supplemental-address-1']"));
           setReadOnly($("[id$='" + address_id + "-city']"));
           setReadOnly($("[id$='" + address_id + "-postal-code']"));
 
           widget.on('result:select', function(fullAddress, metaData) {
             var selected = new AddressFinder.NZSelectedAddress(fullAddress, metaData);
             $("[id$='" + address_id + "-street-address']").val(selected.address_line_1_and_2());
-            setValueAndDisable($("[id$='" + address_id + "-supplemental-address-2']"), selected.suburb());
+            setValueAndDisable($("[id$='" + address_id + "-supplemental-address-1']"), selected.suburb());
             setValueAndDisable($("[id$='" + address_id + "-city']"), selected.city());
             setValueAndDisable($("[id$='" + address_id + "-postal-code']"), selected.postcode())
             $("[id$='" + address_id + "-country-id']").val('1154').trigger('change');
@@ -52,7 +52,7 @@
         $("[id$='" + address_id + "-country-id']").change(function(e) {
           if ($(this).val() == 1154) {
             $("[id$='" + address_id + "-street-address']").attr('placeholder', 'Start typing an address...');
-            setReadOnly($("[id$='" + address_id + "-supplemental-address-2']"));
+            setReadOnly($("[id$='" + address_id + "-supplemental-address-1']"));
             setReadOnly($("[id$='" + address_id + "-city']"));
             setReadOnly($("[id$='" + address_id + "-postal-code']"));
             e.preventDefault();
@@ -61,11 +61,11 @@
           else {
             $("[id$='" + address_id + "-street-address']").removeAttr('placeholder');
             $("[id$='" + address_id + "-street-address']").val('');
-            $("[id$='" + address_id + "-supplemental-address-2']").val('');
+            $("[id$='" + address_id + "-supplemental-address-1']").val('');
             $("[id$='" + address_id + "-city']").val('');
             $("[id$='" + address_id + "-postal-code']").val('');
 
-            setValueAndDisable($("[id$='" + address_id + "-supplemental-address-2']"), '', false);
+            setValueAndDisable($("[id$='" + address_id + "-supplemental-address-1']"), '', false);
             setValueAndDisable($("[id$='" + address_id + "-city']"), '', false);
             setValueAndDisable($("[id$='" + address_id + "-postal-code']"), '', false);
             e.preventDefault();
